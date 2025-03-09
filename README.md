@@ -3,6 +3,9 @@ If the `blinkt` library is not installed, the "DUMMY_BLINK" mode will display co
 
 Run `python cloudberry_weather_lights.py` 
 
+![image](https://github.com/user-attachments/assets/9ffe0c9d-df38-4986-9d4e-4c9e5e687cc7)
+
+
 There are a few constants in [constants.py](constants.py) that you can set to control the behavior. Some of them can be set with environment variables:
 
 ```python
