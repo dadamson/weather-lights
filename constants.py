@@ -13,6 +13,8 @@ print(DUMMY_BLINK, REVERSE_LIGHTS, NORMALIZE_COLORS, UPDATE_PERIOD, TWINKLE_TIME
 PRECIP_WEATHER = ['Snow', 'Rain', 'Drizzle', 'Thunderstorm', 'Shower', 'Thunderstorms', 'Showers']
 NO_PRECIP_WEATHER = ['Sunny', 'Clear', 'Clouds', 'Cloudy', 'Overcast', 'Fog', 'Mist', 'Haze', 'Frost']
 
+# make precipitation fall in these rainbow sprinkle colors
+# between the indcated dates
 PARTY_COLORS = [
     (128, 8, 0),
     (8, 128, 0),
@@ -23,15 +25,15 @@ PARTY_COLORS = [
     (108, 28, 0)
 ]
 HOLIDAYS = [
-    ((1, 1), (1, 2)),
-    ((2, 13), (2, 15)),
-    ((4, 7), (4, 9)),
-    ((6, 24), (6, 28)),
-    ((7, 3), (7, 5)),
-    ((7, 27), (7, 29)),
-    ((10, 27), (11, 2)),
-    ((11, 24), (11, 30)),
-    ((12, 12), (12, 31))
+    ((1, 1), (1, 2)),      # New Year
+    ((2, 13), (2, 15)),    # Valentine's day
+    ((4, 7), (4, 9)),      # birthday
+    ((6, 24), (6, 28)),    # birthday
+    ((7, 3), (7, 5)),      # July 4
+    ((7, 27), (7, 29)),    # birthday
+    ((10, 27), (11, 2)),   # Halloween
+    ((11, 24), (11, 30)),  # Thanksgiving
+    ((12, 12), (12, 31))   # Hannukah, Christmas, dirthday
 ]
 TEMPERATURE_COLORS = {
     -20: (128, 128, 128),  # Deadly White
@@ -59,6 +61,8 @@ SAMPLE_TEMPS = [-5, -5, 10, 10, 17, 17, 23, 23, 30, 30,
                 72, 72, 79, 79, 86, 86, 93, 93, 100, 100]
 ZIP = '15217,us'
 
+# https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM
+# 
 wmo_code_4677 = {
     0: ("Clear", "Cloud development not observed or not observable"),
     1: ("Clouds", "Clouds generally dissolving or becoming less developed"),
