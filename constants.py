@@ -1,11 +1,24 @@
 import os
 
+# output to terminal instead of blinkt
 DUMMY_BLINK = int(os.environ.get('DUMMY_BLINK', 0))
+
+# which way is "up"? Time and precipitation should progress from top to bottom.
 REVERSE_LIGHTS = int(os.environ.get('REVERSE', 0))
+
+# interpolate the color values between TEMPERATURE_COLORS values
 BLEND_COLORS = int(os.environ.get('BLEND_COLORS', 0))
+
+# normalize a color tuple to a given "total brightness" (eg, sum of R, G, B values)
 NORMALIZE_COLORS = int(os.environ.get('NORMALIZE', 128))
+
+#minutes between weather API calls
 UPDATE_PERIOD = 60*int(os.environ.get('WEATHER_UPDATE_MIN', 15))
+
+# seconds between blinks
 TWINKLE_TIME = float(os.environ.get('WEATHER_TWINKLE_TIME', 0.5))
+
+# how much does rain dim the temperature color?
 DIM_FACTOR = 0.25
 
 print(DUMMY_BLINK, REVERSE_LIGHTS, NORMALIZE_COLORS, UPDATE_PERIOD, TWINKLE_TIME)
@@ -62,7 +75,7 @@ SAMPLE_TEMPS = [-5, -5, 10, 10, 17, 17, 23, 23, 30, 30,
 ZIP = '15217,us'
 
 # https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM
-# 
+#
 wmo_code_4677 = {
     0: ("Clear", "Cloud development not observed or not observable"),
     1: ("Clouds", "Clouds generally dissolving or becoming less developed"),

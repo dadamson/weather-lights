@@ -10,10 +10,11 @@ import constants as cbx
 log = logging.getLogger(__name__)
 
 # https://www.weather.gov/documentation/services-web-api
-# https://api.weather.gov/points/40.43,-79.91 -- get station / gridpoint
+# see https://weather-gov.github.io/api/gridpoints for information on how to select your gridpoint and station
+# https://api.weather.gov/points/40.43,-79.91 -- get station / gridpoint URLs from lat,long
 
-forecast_url = "https://api.weather.gov/gridpoints/PBZ/81,66/forecast/hourly"
-current_url = "https://api.weather.gov/stations/KPIT/observations/latest"
+forecast_url = f"https://api.weather.gov/gridpoints/PBZ/81,66/forecast/hourly"
+current_url = f"https://api.weather.gov/stations/KPIT/observations/latest"
 
 my_zone = zoneinfo.ZoneInfo('America/New_York')
 
@@ -49,8 +50,7 @@ def get_forecast():
                                  for k, v in (pw if type(pw) is dict else {'???': pw}).items() if v)
                 current_desc = ' '.join(weather_descs)
             else:
-                current_name = 'Clear'
-                current_desc = 'Clear'
+                current_name = current_desc = current_dict.get('textDescription', 'Clear')
                 print('???')
                 pprint.pprint(current_dict)
                 print('???')

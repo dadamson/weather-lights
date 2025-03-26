@@ -417,12 +417,10 @@ if __name__ == '__main__':
                     # today = None
                     # today = datetime.datetime.now().replace(hour=6, minute=30)
                     draw_weather(forecast, i)  #, today=today)
-                    time.sleep(cbx.TWINKLE_TIME)
+            time.sleep(cbx.TWINKLE_TIME)
         except Exception as ex:
             import traceback as tb
             tb.print_exc()
-
             print(ex)
 
             time.sleep(60)
-
