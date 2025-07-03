@@ -24,7 +24,8 @@ DIM_FACTOR = 0.25
 print(DUMMY_BLINK, REVERSE_LIGHTS, NORMALIZE_COLORS, UPDATE_PERIOD, TWINKLE_TIME)
 
 PRECIP_WEATHER = ['Snow', 'Rain', 'Drizzle', 'Thunderstorm', 'Shower', 'Thunderstorms', 'Showers']
-NO_PRECIP_WEATHER = ['Sunny', 'Clear', 'Clouds', 'Cloudy', 'Overcast', 'Fog', 'Mist', 'Haze', 'Frost']
+NO_PRECIP_WEATHER = ['Sunny', 'Clear', 'Clouds', 'Cloudy', 'Overcast', 'Fog', 'Mist', 'Haze', 'Frost', 'Fog/Mist']
+EXPECTED_WEATHER = NO_PRECIP_WEATHER + PRECIP_WEATHER
 
 # make precipitation fall in these rainbow sprinkle colors
 # between the indcated dates

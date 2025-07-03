@@ -1,6 +1,7 @@
 import datetime
 import logging
 import pprint
+import re
 import zoneinfo
 
 import requests
@@ -76,9 +77,9 @@ def get_forecast():
 
             h_prob = period['probabilityOfPrecipitation']['value']
 
-            expected_weathers = cbx.NO_PRECIP_WEATHER + cbx.PRECIP_WEATHER
+            expected_weathers = cbx.EXPECTED_WEATHER
             # print(period['shortForecast'])
-            h_words = period['shortForecast'].split()
+            h_words = re.split(r'\W+', period['shortForecast'])
             h_matches = [w for w in h_words if any(ew.lower() in w.lower() for ew in expected_weathers)]
             if len(h_matches) == 0:
                 h_matches = h_words

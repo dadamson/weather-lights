@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import datetime
+import json
 import logging
 import math
 import os
@@ -13,9 +14,17 @@ import zoneinfo
 import nws_client as weather_client
 import constants as cbx
 
+
 log = logging.getLogger(__name__)
 
 CURRENT_WEATHER = []
+
+UNEXPECTED_LOG_PATH = 'unexpected_weather.json'
+if os.path.exists(UNEXPECTED_LOG_PATH):
+    with open(UNEXPECTED_LOG_PATH) as jfi:
+        UNEXPECTED_WEATHER = json.load(jfi)
+else:
+    UNEXPECTED_WEATHER = {}
 
 
 my_zone = zoneinfo.ZoneInfo('America/New_York')
@@ -201,7 +210,7 @@ def blink(pixels, pix, snap, k, holiday=False):
     avg_bright = sum(main_color)//3
     frost_color = normalize_rgb([(v+avg_bright)//2 for v in main_color], 128)   # TODO: see if this is nice
 
-    if weather_name in cbx.NO_PRECIP_WEATHER and precip_prob <= 70:
+    if weather_name in cbx.NO_PRECIP_WEATHER or precip_prob <= 70:
         if 'Fog' in weather_name:
             main_color = frost_color  # dim_color
         if 'Mist' in weather_name or 'Haze' in weather_name:
@@ -267,6 +276,10 @@ def blink(pixels, pix, snap, k, holiday=False):
                 pixels[x] = blank
             else:
                 pixels[x] = main_color
+        if weather_name not in UNEXPECTED_WEATHER:
+            UNEXPECTED_WEATHER[weather_name] = snap
+            with open(UNEXPECTED_LOG_PATH, 'w') as jfo:
+                json.dump(UNEXPECTED_WEATHER, jfo)
 
 
 def get_temp_color(temp, normalize=cbx.NORMALIZE_COLORS, blend=cbx.BLEND_COLORS):
@@ -418,6 +431,7 @@ if __name__ == '__main__':
                 for i in range(int(cbx.UPDATE_PERIOD / cbx.TWINKLE_TIME)):
                     # today = None
                     # today = datetime.datetime.now().replace(hour=6, minute=30)
+                    time.sleep(cbx.TWINKLE_TIME)
                     draw_weather(forecast, i)  #, today=today)
                     time.sleep(cbx.TWINKLE_TIME)
         except Exception as ex:
